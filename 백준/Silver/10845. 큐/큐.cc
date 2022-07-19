@@ -1,114 +1,80 @@
-#include <iostream>
+#include <bits/stdc++.h>	
 
 using namespace std;
 
-struct node {
-	int data;
-	node* next;
-};
+int arr[10005];
+int head, tail = 0;
 
-class queue {
-private:
-	int size;
-	node* head;
-	node* tail;
+int front();
 
-public:
-	queue() {
-		head = tail = NULL;
-		size = 0;
+int size() {
+	return tail - head;
+}
+
+bool empty() {
+	return size() == 0;
+}
+
+void push(int e) {
+	arr[tail++] = e;
+}
+
+void pop() {
+	cout << front() << "\n";
+	if (empty()) {
+		return;
 	}
+	head++;
+}
 
-	bool empty() {
-		return size == 0;
+int front() {
+	if (empty()) {
+		return -1;
 	}
+	return arr[head];
+}
 
-	int sizes() {
-		return size;
+int back() {
+	if (empty()) {
+		return -1;
 	}
+	return arr[tail - 1];
+}
+int main(void) {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-	void push(int x) {
-		node* newNode = new node;
-		newNode->data = x;
-		if (head == NULL) {
-			head = tail = newNode;
-			tail->next = NULL;
-		}
-		else {
-			newNode->next = NULL;
-			tail->next = newNode;
-			tail = newNode;
-		}
-		size++;
-	}
-
-	void pop() {
-		if (empty()) {
-			cout << -1 << "\n";
-			return;
-		}
-
-		cout << head->data << "\n";
-		node* delNode = head;
-		head = head->next;
-
-		delete delNode;
-		size--;
-	}
-
-	void front() {
-		if (empty()) {
-			cout << -1 << "\n";
-			return;
-		}
-
-		cout << head->data << "\n";
-	}
-
-	void back() {
-		if (empty()){
-			cout << -1 << "\n";
-			return;
-		}
-
-		cout << tail->data << "\n";
-	}
-};
-
-int main() {
 	int n;
 	cin >> n;
 
-	queue q;
 	while (n--) {
 		string s;
 		cin >> s;
 
 		if (s == "push") {
-			int x;
-			cin >> x;
-			q.push(x);
+			int e;
+			cin >> e;
+			push(e);
 		}
-		if (s == "pop") {
-			q.pop();
+		else if (s == "pop") {
+			pop();
 		}
-		if (s == "size") {
-			cout << q.sizes() << "\n";
+		else if (s == "size") {
+			cout << size() << "\n";
 		}
-		if (s == "empty") {
-			if (q.empty()) {
+		else if (s == "empty") {
+			if (empty()) {
 				cout << 1 << "\n";
 			}
 			else {
 				cout << 0 << "\n";
 			}
 		}
-		if (s == "front") {
-			q.front();
+		else if (s == "front") {
+			cout << front() << "\n";
 		}
-		if (s == "back") {
-			q.back();
+		else {
+			cout << back() << "\n";
 		}
 	}
 }
-
