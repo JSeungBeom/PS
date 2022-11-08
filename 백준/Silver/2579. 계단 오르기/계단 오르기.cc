@@ -1,9 +1,10 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-int d[302][3];
+int d[302];
 int s[302];
 
+int sum;
 int stairs;
 
 int main(void) {
@@ -14,19 +15,15 @@ int main(void) {
 
 	for (int i = 1; i <= stairs; i++) {
 		cin >> s[i];
+		sum += s[i];
+	}
+	d[1] = s[1];
+	d[2] = s[2];
+	d[3] = s[3];
+
+	for (int i = 4; i < stairs; i++) {
+		d[i] = min(d[i - 3], d[i - 2]) + s[i];
 	}
 
-
-	d[1][1] = s[1];
-	d[1][2] = 0;
-	d[2][1] = s[2];
-	d[2][2] = s[1] + s[2];
-
-
-	for (int i = 3; i <= stairs; i++) {
-		d[i][1] = max(d[i - 2][1], d[i - 2][2]) + s[i];
-		d[i][2] = d[i - 1][1] + s[i];
-	}
-
-	cout << max(d[stairs][1], d[stairs][2]);
+	cout << sum - min(d[stairs - 1], d[stairs - 2]);
 }
