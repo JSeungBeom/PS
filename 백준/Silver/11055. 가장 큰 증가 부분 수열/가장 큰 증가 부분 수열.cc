@@ -1,6 +1,3 @@
-// Authored by : Hot6Mania
-// Co-authored by : -
-// http://boj.kr/d478c2a6be29437f80e4e280de054d12
 
 #include <bits/stdc++.h>
 using namespace std;
