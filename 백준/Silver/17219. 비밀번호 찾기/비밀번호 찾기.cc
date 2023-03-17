@@ -1,25 +1,25 @@
 #include <bits/stdc++.h>
+#include <unordered_map>
 
 using namespace std;
 
 int n, m;
-string id, pwd;
-map<string, string> sites;
+unordered_map<string, string> note;
+string site, pwd;
 
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
 	cin >> n >> m;
-
+	
 	while (n--) {
-		cin >> id >> pwd;
-		sites.insert({ id, pwd });
+		cin >> site >> pwd;
+		note[site] = pwd;
 	}
 
 	while (m--) {
-		cin >> id;
-		cout << sites.find(id)->second << "\n";
-		
+		cin >> site;
+		cout << note.find(site)->second << "\n";
 	}
 }
