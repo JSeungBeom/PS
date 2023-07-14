@@ -12,10 +12,14 @@ int main(void) {
 	cin >> L;
 	cin >> s;
 
-	int H = 0;
+	long long H = 0;
 
 	for (int i = 0; i < L; i++) {
-		H += ((s[i] - 'a' + 1) * (int)pow(31, i)) % 1234567891;
+		long long mul = 1;
+		for (int j = 0; j < i; j++) {
+			mul *= 31;
+		}
+		H += ((s[i] - 'a' + 1) * mul) % 1234567891;
 	}
 
 	cout << H;
