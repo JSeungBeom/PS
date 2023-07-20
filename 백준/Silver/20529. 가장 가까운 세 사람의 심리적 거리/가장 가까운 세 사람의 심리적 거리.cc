@@ -1,50 +1,53 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int get_distance(string a, string b) {
-	int distance = 0;
-	for (int i = 0; i < 4; i++) {
-		if (a[i] != b[i]) { 
-			distance += 1;
+int t, n;
+string s;
+vector<string> mbti;
+
+
+int check() {
+	int mn = 0x7f7f7f7f;
+	for (int i = 0; i < n - 2; i++) {
+		for (int j = i + 1; j < n - 1; j++) {
+			for (int k = j + 1; k < n; k++) {
+				int cnt = 0;
+				for (int a = 0; a < 4; a++) {
+					if (mbti[i][a] != mbti[j][a]) cnt++;
+					if (mbti[i][a] != mbti[k][a]) cnt++;
+					if (mbti[j][a] != mbti[k][a]) cnt++;
+				}
+
+				mn = min(mn, cnt);
+			}
 		}
 	}
-	return distance;
+
+	return mn;
 }
 
+int main(void) {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
+	cin >> t;
 
-	int T;
-	cin >> T;
-	for (int i = 0; i < T; i++) {
-		vector<string> str;
-		int N;
-		cin >> N;
-		for (int j = 0; j < N; j++) {
-			string tmp;
-			cin >> tmp;
-			str.push_back(tmp);
-		}
-		if (N > 32) { 
-			cout << 0 << '\n';
-		}
-		else { 
-			int min_distance = 100;
-			for (int i = 0; i < N - 2; i++) {
-				for (int j = i + 1; j < N - 1; j++) {
-					for (int k = j + 1; k < N; k++) { 
-						min_distance = min(min_distance, get_distance(str[i], str[j]) + get_distance(str[j], str[k]) + get_distance(str[i], str[k]));
-					}
-				}
-			}
-			cout << min_distance << '\n'; 
+	while (t--) {
+		cin >> n;
+
+		for (int i = 0; i < n; i++){
+			cin >> s;
+			mbti.push_back(s);
 		}
 
+		if (n > 32) {
+			cout << 0 << '\n'; mbti.clear();
+			continue;
+		}
+
+
+		cout << check() << '\n';
+		mbti.clear(); 
 	}
-
-	return 0;
 }
