@@ -2,49 +2,44 @@
 
 using namespace std;
 
-int arr[15];
-int num[15];
-bool isused[15];
 int k;
+int arr[52];
+int ans[52];
 
-void func(int cur) {
-	if (cur == 6) {
-		for (int i = 1; i < 6; i++) {
-			if (arr[i - 1] > arr[i])
-				return;
+void back_tracking(int st, int n) {
+	if (n == 6) {
+		for (int i = 0; i < n; i++) {
+			cout << ans[i] << ' ';
 		}
-
-		for (int i = 0; i < 6; i++) {
-			cout << arr[i] << " ";
-		}
-		cout << "\n";
-
+		cout << '\n';
 		return;
 	}
-
-	for (int i = 0; i < k; i++) {
-		if (!isused[i]) {
-			arr[cur] = num[i];
-			isused[i] = 1;
-			func(cur + 1);
-			isused[i] = 0;
-		}
+	
+	for (int i = st; i < k; i++){
+		ans[n] = arr[i];
+		back_tracking(i + 1, n + 1);
 	}
 }
+
 
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	
+
 	while (true) {
 		cin >> k;
-		if (k == 0)
-			return 0;
+		if (k == 0) return 0;
+
+		fill(arr, arr + k + 1, 0);
+
+		fill(ans, ans + k + 1, 0);
 		for (int i = 0; i < k; i++) {
-			cin >> num[i];
+			cin >> arr[i];
 		}
 
-		func(0);
-		cout << "\n";
+		back_tracking(0, 0);
+		cout << '\n';
 	}
+
+
 }
