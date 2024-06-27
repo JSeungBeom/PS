@@ -1,33 +1,33 @@
-#include <bits/stdc++.h>	
-
+#include <bits/stdc++.h>
 using namespace std;
+
+int n, x;
+vector<int> v;
+int arr[2000003];
 
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	int arr[1000001] = {};
-	int freq[2000001] = {};
-
-	int n;
 	cin >> n;
 
-	for (int i = 0; i < n; i++) {
-		cin >> arr[i];
-	}
+	int num;
 
-	int x;
+	for (int i = 0; i < n; i++) {
+		cin >> num;
+		v.push_back(num);
+	}
+	
 	cin >> x;
-
-	int cnt = 0;
+	int answer = 0;
 
 	for (int i = 0; i < n; i++) {
-		if (freq[x - arr[i]]) {
-			cnt++;
+		if (x - v[i] >= 0) {
+			if (arr[x - v[i]])
+				answer++;
 		}
-		else
-			freq[arr[i]] = 1;
+		arr[v[i]] = 1;
 	}
 
-	cout << cnt;
+	cout << answer;
 }
