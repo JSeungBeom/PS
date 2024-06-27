@@ -1,49 +1,47 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+int t;
 
-int main() {
+int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	int t;
 	cin >> t;
 
 	while (t--) {
-		list<char> key;
-
-		list<char>::iterator p = key.end();
-
+		list<char> l;
 		string s;
+
 		cin >> s;
-
+		auto it = l.begin();
 		for (int i = 0; i < s.length(); i++) {
-			if (s[i] == '<') {
-				if (p != key.begin()) {
-					p--;
+			switch (s[i]) {
+			case '<':
+				if (it != l.begin())
+					it--;
+				break;
+
+			case '>':
+				if (it != l.end())
+					it++;
+				break;
+
+			case '-':
+				if (it != l.begin()) {
+					it--;
+					it = l.erase(it);
 				}
+				break;
+			default:
+				l.insert(it, s[i]);
+				break;
 			}
-			else if (s[i] == '>') {
-				if (p != key.end()) {
-					p++;
-				}
-			}
-			else if (s[i] == '-') {
-				if (p != key.begin()) {
-					p--;
-					p = key.erase(p);
-				}
-			}
-			else {
-				key.insert(p, s[i]);
-			}
+
 		}
 
-		for (char e : key) {
+		for (auto e : l)
 			cout << e;
-		}
-		cout << "\n";
+		cout << '\n';
 	}
-
-
 }
