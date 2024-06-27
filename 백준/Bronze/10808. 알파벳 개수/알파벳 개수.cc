@@ -1,18 +1,18 @@
-#include <bits/stdc++.h>	
-
+#include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-	string s;
+int alpha[26];
+
+string s;
+
+int main(void) {
 	cin >> s;
 
-	int alpha[26] = { 0, };
-
 	for (int i = 0; i < s.length(); i++) {
-		alpha[s[i] - 97]++;
+		alpha[s[i] - 'a']++;
 	}
 
-	for (int e : alpha) {
+	for (auto e : alpha) {
 		cout << e << ' ';
 	}
 }
