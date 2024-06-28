@@ -2,72 +2,61 @@
 
 using namespace std;
 
-int main(void) {
+int N, x;
+string com;
+deque<int> dq;
+
+int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	deque<int> d;
+	cin >> N;
 
-	int n;
-	cin >> n;
+	while (N--) {
+		cin >> com;
 
-	while (n--) {
-		string s;
-		cin >> s;
-
-		int x;
-
-		if (s == "push_front") {
+		if (com == "push_front") {
 			cin >> x;
-			d.push_front(x);
+			dq.push_front(x);
 		}
-		else if (s == "push_back") {
+		else if (com == "push_back") {
 			cin >> x;
-			d.push_back(x);
+			dq.push_back(x);
 		}
-		else if (s == "pop_front") {
-			if (d.empty()) {
-				cout << -1 << "\n";
-			}
+		else if (com == "pop_front") {
+			if (dq.empty())
+				cout << -1 << '\n';
 			else {
-				cout << d.front() << "\n";
-				d.pop_front();
+				cout << dq.front() << '\n';
+				dq.pop_front();
 			}
 		}
-		else if (s == "pop_back") {
-			if (d.empty()) {
-				cout << -1 << "\n";
-			}
+		else if (com == "pop_back") {
+			if (dq.empty())
+				cout << -1 << '\n';
 			else {
-				cout << d.back() << "\n";
-				d.pop_back();
+				cout << dq.back() << '\n';
+				dq.pop_back();
 			}
 		}
-		else if (s == "size") {
-			cout << d.size() << "\n";
+		else if (com == "size") {
+			cout << dq.size() << '\n';
 		}
-		else if (s == "empty") {
-			if (d.empty()) {
-				cout << 1 << "\n";
-			}
+		else if (com == "empty") {
+			cout << dq.empty() << '\n';
+		}
+		else if (com == "front") {
+			if (dq.empty())
+				cout << -1 << '\n';
 			else {
-				cout << 0 << "\n";
+				cout << dq.front() << '\n';
 			}
 		}
-		else if (s == "front") {
-			if (d.empty()) {
-				cout << -1 << "\n";
-			}
+		else {
+			if (dq.empty())
+				cout << -1 << '\n';
 			else {
-				cout << d.front() << "\n";
-			}
-		}
-		else{
-			if (d.empty()) {
-				cout << -1 << "\n";
-			}
-			else {
-				cout << d.back() << "\n";
+				cout << dq.back() << '\n';
 			}
 		}
 	}
