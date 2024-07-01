@@ -1,33 +1,33 @@
-#include <bits/stdc++.h>	
+#include <bits/stdc++.h>
 
 using namespace std;
+
+int n;
+string s;
 
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-
-	int n;
+	
 	cin >> n;
 
-	int cnt = 0;
+	int ans = 0;
+
 	while (n--) {
-		string s;
 		cin >> s;
-		stack<char> word;
-		word.push(s[0]);
-		for (int i = 1; i < s.length(); i++) {
-			if (!word.empty() && s[i] == word.top()) {
-				word.pop();
-			}
-			else {
-				word.push(s[i]);
-			}
+		stack<char> st;
+
+		for (int i = 0; i < s.length(); i++) {
+			if (st.empty() || st.top() != s[i])
+				st.push(s[i]);
+			else
+				st.pop();
 		}
 
-		if (word.empty()) {
-			cnt++;
-		}
+		if (st.empty())
+			ans++;
 	}
 
-	cout << cnt;
+	cout << ans;
+
 }
