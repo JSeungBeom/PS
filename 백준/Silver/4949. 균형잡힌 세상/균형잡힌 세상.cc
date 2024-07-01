@@ -1,52 +1,48 @@
-#include <bits/stdc++.h>	
+#include <bits/stdc++.h>
 
 using namespace std;
+
+string s;
 
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	
+	while (true) {
+		getline(cin, s);
 
-	string s;
-	while (getline(cin, s)) {
-		if (s == ".") {
-			break;
-		}
+		stack<char> st;
+		bool flag = 0;
 
-		stack<char> par;
-
-		int flag = false;
+		if (s == ".")
+			return 0;
 
 		for (int i = 0; i < s.length(); i++) {
-			if (s[i] == '(' || s[i] == '[') {
-				par.push(s[i]);
-			} 
+			if (s[i] == '(' || s[i] == '[')
+				st.push(s[i]);
 			else if (s[i] == ')') {
-				if (!par.empty() && par.top() == '(') {
-					par.pop();
-				}
+				if (!st.empty() && st.top() == '(')
+					st.pop();
 				else {
-					flag = true;
+					flag = 1;
+					break;
 				}
 			}
 			else if (s[i] == ']') {
-				if (!par.empty() && par.top() == '[') {
-					par.pop();
-				}
+				if (!st.empty() && st.top() == '[')
+					st.pop();
 				else {
-					flag = true;
+					flag = 1;
+					break;
 				}
 			}
 		}
 
-
-		if (!par.empty() || flag) {
-			cout << "no\n";
+		if (flag || !st.empty()) {
+			cout << "no" << '\n';
 		}
 		else {
-			cout << "yes\n";
+			cout << "yes" << '\n';
 		}
 	}
-
 }
