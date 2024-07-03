@@ -2,31 +2,30 @@
 
 using namespace std;
 
-int N;
-int paper[2200][2200];
+int board[3005][3005];
+int n;
 int cnt[3];
 
-bool check(int x, int y, int n) {
-	for (int i = x; i < x + n; i++) {
-		for (int j = y; j < y + n; j++) {
-			if (paper[x][y] != paper[i][j])
-				return false;
+bool chk(int n, int r, int c) {
+	for (int i = r; i < r + n; i++) {
+		for (int j = c; j < c + n; j++) {
+			if (board[r][c] != board[i][j])
+				return 0;
 		}
 	}
-
-	return true;
+	
+	return 1;
 }
-
-void func(int x, int y, int z) {
-	if (check(x, y, z)) {
-		cnt[paper[x][y] + 1] += 1;
+void func(int n, int r, int c) {
+	if (chk(n, r, c)) {
+		cnt[board[r][c] + 1]++;
 		return;
 	}
 
-	int n = z / 3;
+	int x = n / 3;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
-			func(x + i * n, y + j * n, n);
+			func(x, x * i + r, x * j + c);
 		}
 	}
 }
@@ -35,16 +34,17 @@ int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	cin >> N;
+	cin >> n;
 
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			cin >> paper[i][j];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> board[i][j];
 		}
 	}
+	
+	func(n, 0, 0);
 
-	func(0, 0, N);
 	for (int i = 0; i < 3; i++) {
-		cout << cnt[i] << "\n";
+		cout << cnt[i] << '\n';
 	}
 }
