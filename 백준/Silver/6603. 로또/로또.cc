@@ -3,24 +3,6 @@
 using namespace std;
 
 int k;
-int arr[52];
-int ans[52];
-
-void back_tracking(int st, int n) {
-	if (n == 6) {
-		for (int i = 0; i < n; i++) {
-			cout << ans[i] << ' ';
-		}
-		cout << '\n';
-		return;
-	}
-	
-	for (int i = st; i < k; i++){
-		ans[n] = arr[i];
-		back_tracking(i + 1, n + 1);
-	}
-}
-
 
 int main(void) {
 	ios::sync_with_stdio(0);
@@ -28,18 +10,25 @@ int main(void) {
 
 	while (true) {
 		cin >> k;
-		if (k == 0) return 0;
 
-		fill(arr, arr + k + 1, 0);
+		if (k == 0)
+			return 0;
 
-		fill(ans, ans + k + 1, 0);
-		for (int i = 0; i < k; i++) {
+		vector<int> lottery;
+		int arr[50] = { 0 };
+	
+		for (int i = 1; i <= k; i++) {
 			cin >> arr[i];
+			lottery.push_back(i <= 6 ? 0 : 1);
 		}
 
-		back_tracking(0, 0);
+		do {
+			for (int i = 0; i < k; i++) {
+				if (lottery[i] == 0)
+					cout << arr[i + 1] << ' ';
+			}
+			cout << '\n';
+		} while (next_permutation(lottery.begin(), lottery.end()));
 		cout << '\n';
 	}
-
-
 }
