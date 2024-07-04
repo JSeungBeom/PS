@@ -3,19 +3,18 @@
 using namespace std;
 
 int n, s;
-int arr[30];
-int cnt = 0;
+int arr[25];
+bool vis[25];
+int cnt;
 
-void func(int cur, int total) {
+void solve(int cur, int tot) {
 	if (cur == n) {
-		if (total == s) {
-			cnt++;
-		}
+		if (tot == s) cnt++;
 		return;
 	}
 
-	func(cur + 1, total);
-	func(cur + 1, total + arr[cur]);
+	solve(cur + 1, tot);
+	solve(cur + 1, tot + arr[cur]);
 }
 
 int main(void) {
@@ -23,14 +22,13 @@ int main(void) {
 	cin.tie(0);
 
 	cin >> n >> s;
-	for (int i = 0; i < n; i++) {
+	
+	for (int i = 0; i < n; i++)
 		cin >> arr[i];
-	}
 
-	func(0, 0);
-	if (s == 0) {
-		cnt--;
-	}
+	solve(0, 0);
+
+	if (s == 0) cnt--;
 
 	cout << cnt;
 }
