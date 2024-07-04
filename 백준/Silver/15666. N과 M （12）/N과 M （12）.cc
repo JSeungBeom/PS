@@ -1,36 +1,31 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 int n, m;
 int arr[10];
-int temp[10];
-bool isused[10];
+int ans[10];
+set<string> s;
 
-
-void func(int k) {
+void solve(int k, int st) {
 	if (k == m) {
-		for (int i = 1; i < m; i++) {
-			if (arr[i - 1] > arr[i]) {
-				return;
-			}
+		for (int i = 0; i < k; i++) {
+			cout << ans[i] << ' ';
 		}
-		for (int i = 0; i < m; i++) {
-			cout << arr[i] << " ";
-		}
-		cout << "\n";
+		cout << '\n';
 		return;
-	}
+	};
 
-	int tmp = 0;
-	for (int i = 0; i < n; i++) {
-		if (tmp != temp[i]) {
-			arr[k] = temp[i];
-			tmp = arr[k];
-			func(k + 1);
+	int tmp = -1;
+	for (int i = st; i < n; i++) {
+		if (arr[i] != tmp) {
+			ans[k] = arr[i];
+			tmp = ans[k];
+			solve(k + 1, i);
 		}
-		
 	}
 }
+
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
@@ -38,12 +33,10 @@ int main(void) {
 	cin >> n >> m;
 
 	for (int i = 0; i < n; i++) {
-		cin >> temp[i];
+		cin >> arr[i];
 	}
 
-	sort(temp, temp + n);
-	func(0);
+	sort(arr, arr + n);
 
-
-
+	solve(0, 0);
 }
