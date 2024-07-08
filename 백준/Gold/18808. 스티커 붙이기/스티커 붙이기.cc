@@ -2,23 +2,23 @@
 
 using namespace std;
 
-int n, m, k, r, c;
-
-int board[50][50];
-int sticker[15][15];
+int n, m, k;
+int note[50][50];
+int stick[20][20];
+int r, c;
 
 bool chk(int x, int y) {
 	for (int i = 0; i < r; i++) {
 		for (int j = 0; j < c; j++) {
-			if (board[x + i][y + j] == 1 && sticker[i][j] == 1)
+			if (note[x + i][y + j] == 1 && stick[i][j] == 1)
 				return 0;
 		}
 	}
 
 	for (int i = 0; i < r; i++) {
 		for (int j = 0; j < c; j++) {
-			if (sticker[i][j] == 1)
-				board[x + i][y + j] = 1;
+			if(stick[i][j])
+				note[x + i][y + j] = stick[i][j];
 		}
 	}
 
@@ -26,17 +26,17 @@ bool chk(int x, int y) {
 }
 
 void rotate() {
-	int tmp[15][15];
+	int tmp[20][20];
 
 	for (int i = 0; i < r; i++) {
 		for (int j = 0; j < c; j++) {
-			tmp[i][j] = sticker[i][j];
+			tmp[i][j] = stick[i][j];
 		}
 	}
 
 	for (int i = 0; i < c; i++) {
 		for (int j = 0; j < r; j++) {
-			sticker[i][j] = tmp[r - 1 - j][i];
+			stick[i][j] = tmp[r - 1 - j][i];
 		}
 	}
 
@@ -52,39 +52,37 @@ int main(void) {
 
 	while (k--) {
 		cin >> r >> c;
-
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				cin >> sticker[i][j];
+				cin >> stick[i][j];
 			}
 		}
-
-		for (int rot = 0; rot < 4; rot++) {
-			bool is_paste = 0;
-			for (int x = 0; x <= n - r; x++) {
-				if (is_paste) break;
-				for (int y = 0; y <= m - c; y++) {
-					if (chk(x, y)) {
-						is_paste = true;
+		
+		for(int rot = 0; rot < 4; rot++){
+			bool flag = 0;
+			for (int i = 0; i <= n - r; i++) {
+				if (flag) break;
+				for (int j = 0; j <= m - c; j++) {
+					if (chk(i, j)) {
+						flag = 1;
 						break;
 					}
 				}
 			}
 
-			if (is_paste) break;
+			if (flag) break;
 			rotate();
 		}
 
 	}
 
-	int cnt = 0;
+	int ans = 0;
 
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
-			cnt += board[i][j];
+			if (note[i][j]) ans++;
 		}
 	}
 
-	cout << cnt;
-
+	cout << ans;
 }
