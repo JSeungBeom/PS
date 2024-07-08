@@ -8,7 +8,11 @@
 
 ### 분류
 
-백트래킹(backtracking), 브루트포스 알고리즘(bruteforcing), 구현(implementation), 시뮬레이션(simulation)
+백트래킹, 브루트포스 알고리즘, 구현, 시뮬레이션
+
+### 제출 일자
+
+2022년 8월 16일 20:19:51
 
 ### 문제 설명
 
