@@ -1,29 +1,27 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-int d[302];
-int s[302];
 
-int sum;
-int stairs;
+int n;
+int stairs[305];
+int dp[305][3];
 
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	cin >> stairs;
+	cin >> n;
 
-	for (int i = 1; i <= stairs; i++) {
-		cin >> s[i];
-		sum += s[i];
-	}
-	d[1] = s[1];
-	d[2] = s[2];
-	d[3] = s[3];
-
-	for (int i = 4; i < stairs; i++) {
-		d[i] = min(d[i - 3], d[i - 2]) + s[i];
+	for (int i = 1; i <= n; i++) {
+		cin >> stairs[i];
 	}
 
-	cout << sum - min(d[stairs - 1], d[stairs - 2]);
+	dp[1][1] = stairs[1];
+
+	for (int i = 2; i <= n; i++) {
+		dp[i][1] = max(dp[i - 2][1], dp[i - 2][2]) + stairs[i];
+		dp[i][2] = dp[i - 1][1] + stairs[i];
+	}
+
+	cout << max(dp[n][1], dp[n][2]);
 }
