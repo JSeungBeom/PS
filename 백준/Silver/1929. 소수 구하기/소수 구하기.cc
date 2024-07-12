@@ -1,40 +1,25 @@
-/*
-M이상 N이하의 소수를 모두 출력하는 프로그램을 작성하시오.
-*/
-
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int main() {
-	cin.tie(NULL);
-	ios_base::sync_with_stdio(false);
+int m, n;
+vector<bool> state(1000001, true);
 
-	int m, n;
+int main(void) {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
 	cin >> m >> n;
-
-	bool* prime = new bool[n + 1];
-	if (n <= 1) {
-		return 0;
-	}
-	for (int i = 2; i <= n; i++) {
-		prime[i] = true;
-	}
-
-	for (int i = 2; i <= n; i++) {
-		if (prime[i] == true) {
-			for (int j = 2; i * j <= n; j++) {
-				prime[i * j] = false;
-			}
-		}
+	
+	state[1] = false;
+	for (int i = 2; i * i <= n; i++) {
+		if (!state[i]) continue;
+		for (int j = i * i; j <= n; j += i)
+			state[j] = false;
 	}
 
 	for (int i = m; i <= n; i++) {
-		if (prime[i] == true) {
-			cout << i << "\n";
-		}
+		if (state[i])
+			cout << i << '\n';
 	}
-
-	delete[]prime;
 }
