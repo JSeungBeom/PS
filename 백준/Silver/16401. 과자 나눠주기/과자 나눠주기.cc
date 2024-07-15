@@ -1,40 +1,37 @@
 #include <bits/stdc++.h>
+
 using namespace std;
+using ll = long long;
 
-int m, n;
-int a[1000003];
+int n, m;
+int a[1000005];
 
-bool solve(int len) {
-    int ans = 0;
-    for (int i = 0; i < n; i++) {
-        ans += a[i] / len;
-    }
-    return ans >= m;
+bool chk(int target) {
+	ll cur = 0;
+
+	for (int i = 0; i < n; i++) cur += a[i] / target;
+
+	return cur >= m;
 }
 
 int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    
-    cin >> m >> n;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
+	cin >> m >> n;
 
-    int st = 1;
-    int en = 1000000000;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
 
-    while (st < en) {
-        int mid = (st + en + 1) / 2;
-        if (solve(mid)) st = mid;
-        else en = mid - 1;
-    }
+	ll st = 0;
+	ll en = 1e9;
 
-    if (!solve(st)) {
-        cout << 0;
-        return 0;
-    }
+	while (st < en) {
+		ll mid = (st + en + 1) / 2;
+		if (chk(mid)) st = mid;
+		else en = mid - 1;
+	}
 
-    cout << st;
+	cout << st;
 }
