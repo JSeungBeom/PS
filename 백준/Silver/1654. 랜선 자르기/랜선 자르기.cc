@@ -1,36 +1,38 @@
 #include <bits/stdc++.h>
-using namespace std;
 
+using namespace std;
 using ll = long long;
 
 int k, n;
-int lan[10003];
+
+int arr[10005];
 
 bool solve(ll x) {
-    ll cur = 0;
-    for (int i = 0; i < k; i++) {
-        cur += lan[i] / x;
-    }
-
-    return cur >= n;
+	ll cur = 0;
+	for (int i = 0; i < k; i++) cur += arr[i] / x;
+	return cur >= n;
 }
+
 int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    
-    cin >> k >> n;
-    for (int i = 0; i < k; i++) {
-        cin >> lan[i];
-    }
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-    ll st = 1;
-    ll en = 0x7fffffff; // 2^31 - 1
+	cin >> k >> n;
 
-    while (st < en) {
-        ll mid = (st + en + 1) / 2;
-        if (solve(mid)) st = mid;
-        else en = mid - 1;
-    }
+	for (int i = 0; i < k; i++) {
+		cin >> arr[i];
+	}
 
-    cout << st;
+	ll st = 1;
+	ll en = 0x7fffffff;
+
+	while (st < en) {
+		ll mid = (st + en + 1) / 2;
+		if (solve(mid)) st = mid;
+		else en = mid - 1;
+	}
+
+	cout << st;
+
+
 }
