@@ -1,42 +1,35 @@
 #include <bits/stdc++.h>
-using namespace std;
 
+using namespace std;
 using ll = long long;
 
-int na, nb, elem;
-vector<ll> A, B;
+int n, m;
+int A[500005];
+int B[500005];
 
 int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    
-    cin >> na >> nb;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-    for (int i = 0; i < na; i++) {
-        cin >> elem;
-        A.push_back(elem);
-    }
+	cin >> n >> m;
 
-    for (int i = 0; i < nb; i++) {
-        cin >> elem;
-        B.push_back(elem);
-    }
+	for (int i = 0; i < n; i++)
+		cin >> A[i];
 
-    sort(A.begin(), A.end());
-    sort(B.begin(), B.end());
+	for (int i = 0; i < m; i++)
+		cin >> B[i];
 
-    vector<ll> ans;
-    int cnt = 0;
+	sort(A, A + n);
+	sort(B, B + m);
 
-    for (int i = 0; i < na; i++) {
-        if (!binary_search(B.begin(), B.end(), A[i])) {
-            ans.push_back(A[i]);
-            cnt++;
-        }
-    }
+	vector<int> ans;
 
-    cout << cnt << "\n";
-    for (ll num : ans) {
-        cout << num << " ";
-    }
+	for (int i = 0; i < n; i++) {
+		if (!binary_search(B, B + m, A[i]))
+			ans.push_back(A[i]);
+	}
+
+	cout << (int)ans.size() << '\n';
+	for (auto e : ans)
+		cout << e << ' ';
 }
