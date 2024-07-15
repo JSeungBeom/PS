@@ -1,36 +1,37 @@
 #include <bits/stdc++.h>
-using namespace std;
 
+using namespace std;
 using ll = long long;
 
+int arr[1000005];
+int tmp[1000005];
+vector<int> v;
+
 int n;
-ll x[1000003];
-ll x2[1000003];
-vector<ll> a;
 
 int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cin >> x[i];
-        x2[i] = x[i];
-    }
+	cin >> n;
 
-    sort(x, x + n);
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i];
+		tmp[i] = arr[i];
+	}
 
-    int val = x[0];
-    a.push_back(val);
+	sort(arr, arr + n);
 
-    for (int i = 1; i < n; i++) {
-        if (x[i] != val) {
-            val = x[i];
-            a.push_back(val);
-        }
-    }
+	int val = 0x7f7f7f7f;
 
-    for (int i = 0; i < n; i++) {
-        cout << upper_bound(a.begin(), a.end(), x2[i]) - a.begin() - 1<< " ";
-    }
+	for (int i = 0; i < n; i++) {
+		if (arr[i] != val) {
+			v.push_back(arr[i]);
+			val = arr[i];
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		cout << lower_bound(v.begin(), v.end(), tmp[i]) - v.begin() << ' ';
+	}
 }
