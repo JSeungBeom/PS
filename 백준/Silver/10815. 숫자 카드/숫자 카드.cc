@@ -1,27 +1,29 @@
 #include <bits/stdc++.h>
+
 using namespace std;
+using ll = long long;
 
 int n, m;
-int a[500003];
+int arr[500005];
 
 int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    
-    cin >> n;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
+	cin >> n;
 
-    sort(a, a + n);
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i];
+	}
 
-    cin >> m;
+	sort(arr, arr + n);
 
-    int num;
+	cin >> m;
+	int num;
 
-    while (m--) {
-        cin >> num;
-        cout << binary_search(a, a + n, num) << " ";
-    }
+	for (int i = 0; i < m; i++) {
+		cin >> num;
+		cout << binary_search(arr, arr + n, num) << ' ';
+	}
+
 }
