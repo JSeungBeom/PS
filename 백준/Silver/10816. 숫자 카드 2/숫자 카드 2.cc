@@ -1,50 +1,55 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-int n, m, num;
-int a[500003];
+int n, m;
+int arr[500005];
+int num;
 
-int lower_idx(int target) {
-    int st = 0;
-    int en = n;
+int lower_idx(int target, int len) {
+	int st = 0;
+	int en = len;
 
-    while (st < en) {
-        int mid = (st + en) / 2;
-        if (a[mid] >= target) en = mid;
-        else st = mid + 1;
-    }
+	while (st < en) {
+		int mid = (st + en) / 2;
+		if (arr[mid] >= target) en = mid;
+		else st = mid + 1;
+	}
 
-    return st;
+	return st;
 }
 
-int upper_idx(int target) {
-    int st = 0;
-    int en = n;
+int upper_idx(int target, int len) {
+	int st = 0;
+	int en = len;
 
-    while (st < en) {
-        int mid = (st + en) / 2;
-        if (a[mid] > target) en = mid;
-        else st = mid + 1;
-    }
+	while (st < en) {
+		int mid = (st + en) / 2;
+		if (arr[mid] > target) en = mid;
+		else st = mid + 1;
+	}
 
-    return st;
+	return st;
 }
 
 int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-    cin >> n;
+	cin >> n;
 
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i];
+	}
 
-    sort(a, a + n);
-    cin >> m;
+	sort(arr, arr + n);
 
-    while (m--) {
-        cin >> num;
-        cout << upper_idx(num) - lower_idx(num) << " ";
-    }
+	cin >> m;
+
+
+	while (m--) {
+		cin >> num;
+
+		cout << upper_idx(num, n) - lower_idx(num, n) << ' ';
+	}
 }
