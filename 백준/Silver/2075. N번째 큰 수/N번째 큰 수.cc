@@ -10,18 +10,16 @@ int main(void) {
 	cin.tie(0);
 
 	cin >> n;
-
 	int num;
 
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
 			cin >> num;
 			pq.push(num);
-			if (n < pq.size()) pq.pop();
+			if (n < (int)pq.size()) pq.pop();
 		}
 	}
 
 	cout << pq.top();
 
-	
 }
