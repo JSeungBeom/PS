@@ -3,17 +3,9 @@
 using namespace std;
 
 int n;
-int p[100003];
-vector<int> adj[100003];
-
-void DFS(int cur) {
-	for (int nxt : adj[cur]) {
-		if (p[cur] == nxt) continue;
-
-		p[nxt] = cur;
-		DFS(nxt);
-	}
-}
+int par[100005];
+vector<int> adj[100005];
+queue<int> q;
 
 int main(void) {
 	ios::sync_with_stdio(0);
@@ -25,13 +17,26 @@ int main(void) {
 
 	for (int i = 1; i < n; i++) {
 		cin >> u >> v;
+
 		adj[u].push_back(v);
 		adj[v].push_back(u);
 	}
 
-	DFS(1);
+	q.push(1);
+	par[1] = 0;
+
+	while (!q.empty()) {
+		auto cur = q.front(); q.pop();
+
+		for (int nxt : adj[cur]) {
+			if (par[cur] == nxt) continue;
+
+			q.push(nxt);
+			par[nxt] = cur;
+		}
+	}
 
 	for (int i = 2; i <= n; i++) {
-		cout << p[i] << '\n';
+		cout << par[i] << '\n';
 	}
 }
