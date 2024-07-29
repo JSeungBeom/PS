@@ -3,70 +3,71 @@
 using namespace std;
 
 int n, m;
-vector<int> adj[502];
-int p[502];
-bool istree;
-int t;
+int par[505];
+vector<int> adj[505];
 
-void DFS(int cur) {
-	for (int nxt : adj[cur]) {
-		if (p[cur] == nxt) continue;
+bool BFS(int cur) {
+	queue<int> q;
 
-		if (p[nxt] != 0) {
-			istree = 0;
-			continue;
+	q.push(cur);
+
+	while (!q.empty()) {
+		int cur = q.front(); q.pop();
+
+		for (auto nxt : adj[cur]) {
+			if (par[cur] == nxt) continue;
+			if (par[nxt] != 0) return 0;
+
+			par[nxt] = cur;
+			q.push(nxt);
 		}
-
-		p[nxt] = cur;
-		DFS(nxt);
 	}
 
+	return 1;
 }
 
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
+	int u, v;
+	int step = 1;
+
 	while (true) {
 		cin >> n >> m;
 
-		if (n == 0 && m == 0) break;
+		int ans = 0;
+		fill(par, par + n + 1, 0);
+
 
 		for (int i = 1; i <= n; i++) {
 			adj[i].clear();
 		}
 
-		int ans = 0;
+		if (n == 0 && m == 0)
+			return 0;
 
-		fill(p, p + n + 2, 0);
-		int u, v;
-
-		while (m--) {
+		for (int i = 0; i < m; i++) {
 			cin >> u >> v;
+
 			adj[u].push_back(v);
 			adj[v].push_back(u);
 		}
 
 		for (int i = 1; i <= n; i++) {
-			istree = 1; 
-			if (p[i] != 0) continue;
-			DFS(i);
-			ans += istree;
+			if (par[i] != 0) continue;
+			ans += BFS(i);
 		}
 
 
-		switch (ans) {
-		case 0:
-			cout << "Case " << ++t << ": No trees.\n";
-			break;
-		case 1:
-			cout << "Case " << ++t << ": There is one tree.\n";
-			break;
 
-		default:
-			cout << "Case " << ++t << ": A forest of " << ans << " trees.\n";
-			break;
-		}
+		cout << "Case " << step++ << ": ";
 
+		if (ans == 0)
+			cout << "No trees.\n";
+		else if (ans == 1)
+			cout << "There is one tree.\n";
+		else
+			cout << "A forest of " << ans << " trees.\n";
 	}
 }
