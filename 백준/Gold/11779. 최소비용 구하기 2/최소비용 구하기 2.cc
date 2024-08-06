@@ -1,66 +1,69 @@
 #include <bits/stdc++.h>
-#define INF 0x3f3f3f3f
 #define X first
 #define Y second
+#define INF 0x7fffffff
 
 using namespace std;
 
-vector<pair<int, int>> adj[1003];
-priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+vector<pair<int, int>> adj[20005];
+priority_queue<pair<int, int>, vector<pair<int, int>>,
+greater<pair<int, int>>> pq;
+int dist[20005];
+int pre[20005];
 
-int dist[1003];
-int pre[1003]; // 경로
+int v, e, st, en;
 
-int n, m;
-int st, en;
-
-int main() {
+int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	
-	cin >> n >> m;
-	int x, y, cost;
-	while (m--) {
-		cin >> x >> y >> cost;
-		adj[x].push_back({ cost, y });
+
+	cin >> v >> e;
+
+	int a, b, c;
+
+	while (e--) {
+		cin >> a >> b >> c;
+
+		adj[a].push_back({ c, b });
 	}
 
 	cin >> st >> en;
 
-	fill(dist, dist + n + 1, INF);
+	fill(dist, dist + v + 1, INF);
 
 	dist[st] = 0;
-	
+
 	pq.push({ dist[st], st });
 
 	while (!pq.empty()) {
 		auto cur = pq.top(); pq.pop();
+
 		if (cur.X != dist[cur.Y]) continue;
 
 		for (auto nxt : adj[cur.Y]) {
-			if (dist[nxt.Y] <= dist[cur.Y] + nxt.X) continue;
-			dist[nxt.Y] = dist[cur.Y] + nxt.X;
-
-			pq.push({ dist[nxt.Y], nxt.Y });
-			pre[nxt.Y] = cur.Y;
+			if (dist[nxt.Y] > nxt.X + dist[cur.Y]) {
+				dist[nxt.Y] = nxt.X + dist[cur.Y];
+				pre[nxt.Y] = cur.Y;
+				pq.push({ dist[nxt.Y], nxt.Y });
+			}
 		}
 	}
 
 	cout << dist[en] << '\n';
 
+	vector<int> tmp;
+
 	int cur = en;
 
-	vector<int> path;
-
-	while (cur) {
-		path.push_back(cur);
+	while (cur != st) {
+		tmp.push_back(cur);
 		cur = pre[cur];
 	}
+	tmp.push_back(cur);
 
-	cout << path.size() << '\n';
-
-	reverse(path.begin(), path.end());
-	for (auto e : path) {
+	cout << tmp.size() << '\n';
+	reverse(tmp.begin(), tmp.end());
+	for (auto e : tmp)
 		cout << e << ' ';
-	}
+	
 }
