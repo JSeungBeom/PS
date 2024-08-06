@@ -1,44 +1,56 @@
 #include <bits/stdc++.h>
-#define INF 0x7f7f7f7f
 #define X first
 #define Y second
+#define INF 0x7fffffff
+
 using namespace std;
 
-vector<pair<int, int>> adj[20003]; // 가중치, 정점
-priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-int dist[20003];
+vector<pair<int, int>> adj[20005];
+priority_queue<pair<int, int>, vector<pair<int, int>>,
+greater<pair<int, int>>> pq;
+int dist[20005];
 
-int V, E, k, u, v, w;
+int v, e, k;
 
-int main() {
+int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	cin >> V >> E >> k;
+	cin >> v >> e >> k;
 
-	while (E--) {
-		cin >> u >> v >> w;
-		adj[u].push_back({ w, v });
+	int a, b, c;
+
+	while (e--) {
+		cin >> a >> b >> c;
+
+		adj[a].push_back({ c, b });
 	}
 
-	fill(dist, dist + V + 1, INF);
+	fill(dist, dist + v + 1, INF);
 
 	dist[k] = 0;
-	pq.push({ dist[k], k });
+
+	pq.push({ 0, k });
 
 	while (!pq.empty()) {
 		auto cur = pq.top(); pq.pop();
-		if (dist[cur.Y] != cur.X) continue;
+
+		if (cur.X != dist[cur.Y]) continue;
 
 		for (auto nxt : adj[cur.Y]) {
-			if (dist[nxt.Y] <= dist[cur.Y] + nxt.X) continue;
-			dist[nxt.Y] = dist[cur.Y] + nxt.X;
-			pq.push({ dist[nxt.Y], nxt.Y });
+			if (dist[nxt.Y] > nxt.X + dist[cur.Y]) {
+				dist[nxt.Y] = nxt.X + dist[cur.Y];
+				pq.push({ dist[nxt.Y], nxt.Y });
+			}
 		}
 	}
-	
-	for (int i = 1; i <= V; i++) {
-		if (dist[i] == INF) cout << "INF" << '\n';
-		else cout << dist[i] << '\n';
+
+	for (int i = 1; i <= v; i++) {
+		if (dist[i] == INF)
+			cout << "INF\n";
+		else
+			cout << dist[i] << '\n';
 	}
+
+	
 }
