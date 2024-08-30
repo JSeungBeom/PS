@@ -6,9 +6,8 @@ using namespace std;
 
 int n;
 
-int roads[100005];
-int price[100005];
-int tmp[100005];
+long long roads[100005];
+long long price[100005];
 
 int main(void) {
 	ios::sync_with_stdio(0);
@@ -28,7 +27,7 @@ int main(void) {
 
 	cin >> junk;
 
-	int mn = 0x7fffffff;
+	long long mn = 0x7fffffff;
 	long long ans = 0;
 
 	for (int i = 0; i < n - 1; i++) {
