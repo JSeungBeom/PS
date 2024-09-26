@@ -1,30 +1,31 @@
 #include<string>
 #include <iostream>
 #include <stack>
-
 using namespace std;
+
+stack<char> st;
 
 bool solution(string s)
 {
     bool answer = true;
-    string tmp = s;
-    stack<int> st;
-
-    for (int i = 0; i < tmp.length(); i++) {
-        if (tmp[i] == '(')
-            st.push(1);
-        else {
-            if (st.empty())
-                return false;
+    bool flag = 0;
+    
+    for(int i = 0; i < s.length(); i++){
+        if(s[i] == '(')
+            st.push('(');
+        else{
+            if(st.empty()){
+                flag = 1;
+                break;
+            }
             else
                 st.pop();
         }
     }
-
-    if (st.empty())
-        answer = true;
+    
+    if(st.empty() && !flag)
+        answer = 1;
     else
-        answer = false;
-
+        answer = 0;
     return answer;
 }
