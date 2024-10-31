@@ -4,6 +4,7 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(st.nextToken());
@@ -14,18 +15,21 @@ public class Main {
 
         for(int i = 1; i <= N; i++){
             String name = br.readLine();
-
             stoi.put(name, i);
             itos.put(i, name);
         }
 
+        StringBuilder sb = new StringBuilder();
         for(int i = 0; i < M; i++){
             String question = br.readLine();
-            if(0 <= question.charAt(0) - '0' && 9 >= question.charAt(0) - '0')
-                System.out.println(itos.get(Integer.parseInt(question)));
-            else
-                System.out.println(stoi.get(question));
-
+            if(Character.isDigit(question.charAt(0))) { // 문자로 시작하는지 확인
+                sb.append(itos.get(Integer.parseInt(question))).append("\n");
+            } else {
+                sb.append(stoi.get(question)).append("\n");
+            }
         }
+
+        bw.write(sb.toString());
+        bw.flush();
     }
 }
