@@ -39,11 +39,12 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = sc.nextInt();
-        M = sc.nextInt();
-        V = sc.nextInt();
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        V = Integer.parseInt(st.nextToken());
 
         adjList = new LinkedList[N + 1];
         dfs_vis = new boolean[N + 1];
@@ -53,8 +54,9 @@ public class Main {
         }
 
         for(int i = 0; i < M; i++){
-            int u = sc.nextInt();
-            int v = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            int u = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
 
             adjList[u].add(v);
             adjList[v].add(u);
