@@ -4,11 +4,15 @@
 
 ### 성능 요약
 
-메모리: 20660 KB, 시간: 124 ms
+메모리: 54056 KB, 시간: 940 ms
 
 ### 분류
 
 자료 구조, 해시를 사용한 집합과 맵
+
+### 제출 일자
+
+2024년 11월 1일 03:04:33
 
 ### 문제 설명
 
@@ -98,15 +102,15 @@
 
 <p><img alt="" src="https://www.acmicpc.net/upload/201004/pb.PNG" style="height:181px; width:274px"></p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pc.PNG" style="height:183px; width:274px"></p>
+<p><img alt="" src="" style="height:183px; width:274px"></p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pd.PNG" style="height:182px; width:274px"></p>
+<p><img alt="" src="" style="height:182px; width:274px"></p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pe.PNG" style="height:183px; width:274px"></p>
+<p><img alt="" src="" style="height:183px; width:274px"></p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pf.PNG" style="height:183px; width:274px"></p>
+<p><img alt="" src="" style="height:183px; width:274px"></p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pg.PNG" style="height:181px; width:274px"></p>
+<p><img alt="" src="" style="height:181px; width:274px"></p>
 
 <p><img alt="" src="" style="height:184px; width:274px"></p>
 
