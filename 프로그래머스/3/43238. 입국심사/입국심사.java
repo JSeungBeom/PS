@@ -15,7 +15,7 @@ class Solution {
         long answer = 0;
         
         long st = 0;
-        long en = 1000000000 * 1000000000L;
+        long en = 100000 * 1000000000L;
                 
         while(st < en){
             long mid = (st + en) / 2;
