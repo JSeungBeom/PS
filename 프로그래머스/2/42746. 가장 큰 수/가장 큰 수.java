@@ -1,32 +1,29 @@
 import java.util.*;
 
 class Solution {
-    public String solution(int[] numbers) {
-        String answer = "";
-        
+    public String solution(int[] numbers) {        
         String[] nums = new String[numbers.length];
         
-        for(int i = 0; i < nums.length; i++){
-            nums[i] = Integer.toString(numbers[i]);
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i = 0; i < numbers.length; i++){
+            nums[i] = String.valueOf(numbers[i]);
         }
         
-        Arrays.sort(nums, new Comparator<String>() {
-            @Override
-            public int compare(String a, String b){
-                String o1 = a + b;
-                String o2 = b + a;
-                
-                return o2.compareTo(o1);
-            }
+        Arrays.sort(nums, (o1, o2) -> {
+            String s1 = o1 + o2;
+            String s2 = o2 + o1;
+            
+            return s2.compareTo(s1);
         });
         
-        for(int i = 0; i < nums.length; i++){
-            answer += nums[i];
+        for(String num : nums){
+            sb.append(num);
         }
         
-        if (nums[0].equals("0")) {
-            return "0";
-        }
+        String answer = sb.toString();
+        
+        if(answer.charAt(0) == '0') answer = "0";
         
         return answer;
     }
