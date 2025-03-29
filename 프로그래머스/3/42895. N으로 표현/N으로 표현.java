@@ -18,7 +18,6 @@ class Solution {
                 for(int a : dp.get(i)){
                     for(int b : dp.get(j)){
                         dp.get(i + j).add(a + b);
-                        dp.get(i + j).add(b + a);
                         
                         dp.get(i + j).add(a - b);
                         dp.get(i + j).add(b - a);
