@@ -11,7 +11,7 @@ public class Main {
 		
 		X = Integer.parseInt(br.readLine());
 		
-		for(int i = 1; i <= X; i *= 2) {
+		for(int i = 1; i <= X; i <<= 1) {
 			if((i & X) == i) cnt++;
 		}
 		
