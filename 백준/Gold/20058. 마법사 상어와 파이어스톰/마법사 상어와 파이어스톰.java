@@ -55,38 +55,26 @@ public class Main {
 	}
 	
 	static void rotate(int L) {
-	
-		for(int row = 0; row < (1 << N); row += (1 << L)) {
-			for(int col = 0; col < (1 << N); col += (1 << L)) {
-				int[][] cpyOrigin = new int[1 << L][1 << L];
-				int[][] cpyChange = new int[1 << L][1 << L];
-				
-				for(int i = row; i < row + (1 << L); i++) {
-					for(int j = col; j < col + (1 << L); j++){
-						cpyOrigin[i - row][j - col] = board[i][j];
-						cpyChange[i - row][j - col] = board[i][j];
-					}
-				}
-				
-				for(int i = 0; i < (1 << L); i++) {
-					for(int j = 0; j < (1 << L); j++) {
-						cpyChange[i][j] = cpyOrigin[(1 << L) - j - 1][i];
-					}
-				}
-				
-				for(int i = row; i < row + (1 << L); i++) {
-					for(int j = col; j < col + (1 << L); j++){
-						board[i][j] = cpyChange[i - row][j - col];
-					}
-				}
-				
-
-			}
-		}
-		
-
-
+	    int size = 1 << L;
+	    for (int row = 0; row < (1 << N); row += size) {
+	        for (int col = 0; col < (1 << N); col += size) {
+	            int[][] temp = new int[size][size];
+	            // 회전: 시계 방향 90도
+	            for (int i = 0; i < size; i++) {
+	                for (int j = 0; j < size; j++) {
+	                    temp[j][size - 1 - i] = board[row + i][col + j];
+	                }
+	            }
+	            // 원본에 덮어쓰기
+	            for (int i = 0; i < size; i++) {
+	                for (int j = 0; j < size; j++) {
+	                    board[row + i][col + j] = temp[i][j];
+	                }
+	            }
+	        }
+	    }
 	}
+
 	
 	static void decreaseIce() {
 		List<int[]> list = new ArrayList<>();
